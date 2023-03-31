@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 团队总人数 -->
+  <view class="widget-people f-28 col-9" >{{ words.team.words.total_team.value }}：{{ team_total }}人 
+  <text style="padding-left:10% ;">团队总业绩：￥{{team_money}}</text></view>
+  <!-- 我的团队列表 -->
+  <scroll-view scroll-y="{{ true }}" bindscrolltolower="triggerDownLoad" style="height: {{swiperHeight}}px;">
+    <view class="widget-list b-f" wx:if="{{ list.data.length }}">
+      <view class="widget__detail dis-flex flex-x-between" wx:for="{{ list.data }}" wx:key="this">
+        <view class="detail__left dis-flex flex-y-center">
+          <view class="user-avatar">
+            <image src="{{ item.avatarUrl }}"></image>
+          </view>
+          <view class="user-info dis-flex flex-dir-column flex-x-center">
+            <view class="user-nickName f-28">{{ item.nickName }}</view>
+            <view class="user-nickName col-9 f-24">{{ item.name }}</view>
+            <view class="user-time col-9 f-24">上级ID：{{ item.referee_id }}</view>
+          </view>
+        </view>
+        <view class="detail__right dis-flex flex-dir-column flex-x-center flex-y-center">
+          <view class="detail__money">
+            <text class="f-24">用户ID:{{ item.user_id }}</text>
+          </view>
+          <view class="detail__money">
+            <text class="f-24">实际消费￥</text>
+            <text class="f-34">{{ item.expend_money }}</text>
+          </view>
+          <view class="detail__member f-22" wx:if="{{ item.dealer }}">
+            {{ item.dealer.first_num + item.dealer.second_num + item.dealer.third_num }}个成员
+          </view>
+        </view>
+      </view>
+      <!-- 没有更多 -->
+      <view wx:if="{{ list.data.length && !isLoading && no_more }}" class="no-more f-30">亲, 没有更多了</view>
+    </view>
+    <!-- 没有记录 -->
+    <view class="yoshop-notcont" wx:if="{{ !list.data.length && !isLoading }}">
+      <text class="iconfont icon-wushuju"></text>
+      <text class="cont">亲，暂无团队记录哦</text>
+    </view>
+  </scroll-view>
+</view>
