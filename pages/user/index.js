@@ -37,6 +37,7 @@ Page({
    */
   getUserDetail() {
     let _this = this;
+    // console.log(this.data.userInfo);
     App._get('user.index/detail', {}, function (result) {
       _this.setData(result.data);
     });
